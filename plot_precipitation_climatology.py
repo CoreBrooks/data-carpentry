@@ -1,5 +1,7 @@
 import argparse
 
+import pdb
+
 import xarray as xr
 import matplotlib.pyplot as plt
 import numpy as np
@@ -32,6 +34,8 @@ def apply_mask(darray, sftlf_file, realm):
             """
     dset = xr.open_dataset(sftlf_file)
 
+    assert realm in['land','ocean'], """Valid realms are 'land' or 'ocean'"""
+    
     if realm == 'land':
         masked_darray = darray.where(dset['sftlf'].data < 50)
     else:
